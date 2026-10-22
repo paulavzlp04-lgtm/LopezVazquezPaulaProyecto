@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class MovimientoJugador : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class MovimientoJugador : MonoBehaviour
     InputAction move;
     InputAction jump;
     Rigidbody2D rgb;
-     SpriteRenderer sprite;
+    SpriteRenderer sprite;
+    [SerializeField] LayerMask suelo;
+    CapsuleCollider2D col;
     void Start()
     {
         jump = InputSystem.actions.FindAction("Jump");
@@ -17,26 +20,27 @@ public class MovimientoJugador : MonoBehaviour
         // Coge el Rigidbody2D que tiene este mismo objeto.
         // Si el personaje no tiene Rigidbody2D, dará error.
         rgb = GetComponent<Rigidbody2D>();
+        col = GetComponent<CapsuleCollider2D>();
 
         // animaciones
-   
+
         animator = GetComponent<Animator>();
 
         //Sprite
 
-         sprite = GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
 
 
     }
-        // Para que se mueva y no se caiga: marcar Freeze Rotation Z en el Rigidbody2D
-        // (Rigidbody2D > Constraints > Freeze Rotation Z).
+    // Para que se mueva y no se caiga: marcar Freeze Rotation Z en el Rigidbody2D
+    // (Rigidbody2D > Constraints > Freeze Rotation Z).
 
-        // UPDATE: Unity ejecuta esto una y otra vez, en cada fotograma.
-        // Aquí revisamos qué teclas pulsa el jugador y movemos al personaje.
+    // UPDATE: Unity ejecuta esto una y otra vez, en cada fotograma.
+    // Aquí revisamos qué teclas pulsa el jugador y movemos al personaje.
 
     void Update()
     {
-       // Lee qué pulsa el jugador: x = -1 izquierda, 1 derecha, 0 nada.
+        // Lee qué pulsa el jugador: x = -1 izquierda, 1 derecha, 0 nada.
         Vector2 movimiento = move.ReadValue<Vector2>();
 
         // Mueve al personaje de lado a lado.
@@ -46,7 +50,7 @@ public class MovimientoJugador : MonoBehaviour
         // WasPressedThisFrame = "se acaba de pulsar ahora mismo".
         // Es mejor que IsPressed para saltar, porque IsPressed es verdadero
         // todo el rato que mantienes el botón y saltaría sin parar.
-        if (jump.WasPressedThisFrame())
+        if (jump.WasPressedThisFrame() && Estatocandosuelo())
         {
             // Da velocidad hacia arriba (eje Y) al personaje.
             // La gravedad lo hará caer después sola.
@@ -54,9 +58,9 @@ public class MovimientoJugador : MonoBehaviour
         }
 
 
-       //Que se mueva con el flip
+        //Que se mueva con el flip
 
-         if (movimiento.x > 0)
+        if (movimiento.x > 0)
         {
             sprite.flipX = false;
         }
@@ -79,7 +83,41 @@ public class MovimientoJugador : MonoBehaviour
             animator.SetInteger("estado", 1);
         }
 
+         // Si NO toca el suelo, está en el aire.
+        if (!Estatocandosuelo())
+        {
+            // Subiendo: saltar (2).
+            if (rgb.linearVelocityY > 0.1f)
+            {
+                animator.SetInteger("estado", 2);
+            }
+            // Bajando: caer (3).
+            else
+            {
+                animator.SetInteger("estado", 3);
+            }
+        }
+
+
+
+
 
     }
+
+
+    bool Estatocandosuelo()
+    {
+        return Physics2D.BoxCast
+        (col.bounds.center,
+         col.bounds.size,
+        0f,
+        Vector2.down,
+       .1f,
+       suelo);
+
+    }
+
+
 }
+
 

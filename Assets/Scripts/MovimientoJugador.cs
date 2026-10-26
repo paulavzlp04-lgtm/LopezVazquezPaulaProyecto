@@ -4,8 +4,8 @@ using UnityEngine.UIElements;
 
 public class MovimientoJugador : MonoBehaviour
 {
-    float velocidad = 3f;
-    float velocidadSalto = 4f;
+    float velocidad = 5f;
+    float velocidadSalto = 5f;
     Animator animator;
     InputAction move;
     InputAction jump;
@@ -97,9 +97,6 @@ public class MovimientoJugador : MonoBehaviour
                 animator.SetInteger("estado", 3);
             }
         }
-
-
-
 
 
     }

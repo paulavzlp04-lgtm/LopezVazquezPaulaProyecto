@@ -40,8 +40,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Cielo
+    uniqueID: 175448437
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Mundo
+    uniqueID: 1015733545
+    locked: 0
+  - name: Personajes
+    uniqueID: 3533426349
     locked: 0
   m_RenderingLayers:
   - Default

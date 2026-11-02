@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class MovimientoJugador : MonoBehaviour
 {
     float velocidad = 5f;
-    float velocidadSalto = 5f;
+    float velocidadSalto = 6f;
     Animator animator;
     InputAction move;
     InputAction jump;

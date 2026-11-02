@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class ContadorFrutas : MonoBehaviour
 {
-    public int frutas = 0;
+    public static int frutas = 0;
     public TMP_Text texto;
 
+    void Start()
+    {
+        texto.text = frutas.ToString();
+    }
     public void SumarFruta()
     {
         frutas++;

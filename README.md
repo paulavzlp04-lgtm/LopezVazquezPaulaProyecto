@@ -6,7 +6,7 @@
 
 ## De qué va el juego
 
-Es un juego de plataformas 2D en el que controlas a un ninja que debe recorrer varios niveles recogiendo fresas y esquivando peligros. Por el camino hay pinchos, sierras y enemigos que patrullan de un lado a otro. Si tocas un peligro, el ninja muere y el nivel se reinicia, pero puedes derrotar a los enemigos saltando sobre su cabeza. Al llegar a la meta de cada nivel pasas al siguiente.
+Es un juego de plataformas 2D en el que controlas a un ninja que debe recorrer varios niveles recogiendo fresas y esquivando peligros. Por el camino hay pinchos, sierras y enemigos que patrullan de un lado a otro. Si tocas un peligro, pierdes una vida y el nivel se reinicia. Puedes derrotar a los enemigos saltando sobre su cabeza. Al llegar a la meta de cada nivel pasas al siguiente, y si te quedas sin vidas, el juego termina.
 
 ## Controles
 
@@ -24,7 +24,9 @@ Es un juego de plataformas 2D en el que controlas a un ninja que debe recorrer v
 - Enemigos y trampas con animación de muerte y reinicio del nivel.
 - Enemigos y plataformas que se mueven de un lado a otro con un script reutilizable.
 - Varios niveles y pantalla de fin con el total de frutas.
-- Música y efectos de sonido.
+- Música de fondo en cada escena y efectos de sonido: salto, pasos y muerte.
+- Controles táctiles en pantalla (On-Screen Buttons) para jugar en móvil.
+- Exportado para Android (APK).
 
 ## Capturas
 
@@ -47,6 +49,6 @@ Es un juego de plataformas 2D en el que controlas a un ninja que debe recorrer v
 ## Mejoras futuras
 
 - Añadir más niveles.
-- Sistema de vidas y barra de vida.
+- Barra de vida visual en lugar de solo el número.
 - Doble salto y coleccionables con mejoras temporales.
-- Versión para móvil.
+

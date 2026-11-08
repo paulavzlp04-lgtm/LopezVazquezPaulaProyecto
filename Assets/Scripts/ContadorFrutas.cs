@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class ContadorFrutas : MonoBehaviour
 {
-    public static int frutas = 0;
+    public static int frutas;
+    public static int frutasAlEmpezarNivel;
     public TMP_Text texto;
 
     void Start()

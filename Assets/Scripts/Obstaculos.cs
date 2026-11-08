@@ -27,8 +27,18 @@ public class Obstaculos : MonoBehaviour
 
     void Reiniciar()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ContadorVidas.vidas--;
+        ContadorFrutas.frutas = ContadorFrutas.frutasAlEmpezarNivel;
 
+        if (ContadorVidas.vidas <= 0)
+        {
+            ContadorVidas.vidas = 3;
+            SceneManager.LoadScene("Fin");
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     void Morir()

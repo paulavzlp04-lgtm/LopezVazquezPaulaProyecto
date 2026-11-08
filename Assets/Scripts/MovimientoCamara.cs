@@ -11,7 +11,9 @@ public class MovimientoCamara : MonoBehaviour
 
     void Update()
     {
-          transform.position = new Vector3(
+        if (ninja == null) return;
+
+        transform.position = new Vector3(
             ninja.transform.position.x,
             ninja.transform.position.y,
             transform.position.z

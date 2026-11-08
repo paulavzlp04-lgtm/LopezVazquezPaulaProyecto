@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Obstaculos : MonoBehaviour
 {
-
+    [SerializeField] AudioClip sonidoMorir;
     Animator animator;
     GameObject ninja;
 
@@ -15,7 +15,7 @@ public class Obstaculos : MonoBehaviour
         {
             this.ninja = ninja.gameObject;
             animator = ninja.gameObject.GetComponent<Animator>();
-            
+            ninja.gameObject.GetComponent<MovimientoJugador>().SonarMuerte();
             ninja.gameObject.GetComponent<MovimientoJugador>().enabled = false;
             animator.Play("Morir");
             Invoke("Morir", 2f);

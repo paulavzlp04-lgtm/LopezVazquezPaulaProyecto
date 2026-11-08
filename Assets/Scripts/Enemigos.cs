@@ -32,6 +32,7 @@ public class Enemigo : MonoBehaviour
             ninja = other.gameObject;
             animator = ninja.GetComponent<Animator>();
 
+            ninja.GetComponent<MovimientoJugador>().SonarMuerte();
             ninja.GetComponent<MovimientoJugador>().enabled = false;
             ninja.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             animator.Play("Morir");

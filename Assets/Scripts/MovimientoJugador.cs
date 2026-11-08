@@ -13,10 +13,15 @@ public class MovimientoJugador : MonoBehaviour
     SpriteRenderer sprite;
     [SerializeField] LayerMask suelo;
     CapsuleCollider2D col;
+    [SerializeField] AudioClip sonidoSalto;
+    [SerializeField] AudioSource audioPasos;
+    [SerializeField] AudioClip sonidoMorir;
+    AudioSource audioSource;
     void Start()
     {
         jump = InputSystem.actions.FindAction("Jump");
         move = InputSystem.actions.FindAction("Move");
+        audioSource = GetComponent<AudioSource>();
         // Coge el Rigidbody2D que tiene este mismo objeto.
         // Si el personaje no tiene Rigidbody2D, dará error.
         rgb = GetComponent<Rigidbody2D>();
@@ -55,6 +60,7 @@ public class MovimientoJugador : MonoBehaviour
             // Da velocidad hacia arriba (eje Y) al personaje.
             // La gravedad lo hará caer después sola.
             rgb.linearVelocityY = velocidadSalto;
+            audioSource.PlayOneShot(sonidoSalto);
         }
 
 
@@ -98,9 +104,29 @@ public class MovimientoJugador : MonoBehaviour
             }
         }
 
+        //audio andar
+
+        // Pasos: suenan solo si se mueve y está en el suelo
+        bool andando = movimiento.x != 0 && Estatocandosuelo();
+        if (andando && !audioPasos.isPlaying)
+        {
+            audioPasos.Play();
+        }
+        else if (!andando && audioPasos.isPlaying)
+        {
+            audioPasos.Stop();
+        }
+
+
 
     }
 
+
+    public void SonarMuerte()
+    {
+        audioPasos.Stop();
+        AudioSource.PlayClipAtPoint(sonidoMorir, transform.position);
+    }
 
     bool Estatocandosuelo()
     {
